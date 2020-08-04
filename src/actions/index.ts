@@ -1,14 +1,22 @@
 import Action from '../types/Action'
 
-const increment = (): Action => ({
-  type: 'INCREMENT'
+const addIngredient = (ingredient: string): Action => ({
+  type: 'ADD_INGREDIENT',
+  payload: {
+    ingredient
+  }
 })
 
-const decrement = (): Action => ({
-  type: 'DECREMENT'
+const addMeal = (day: string, meal: string, dish: string): Action => ({
+  type: 'ADD_MEAL',
+  payload: {
+    day,
+    meal,
+    dish
+  }
 })
 
 export default {
-  increment,
-  decrement
+  addIngredient,
+  addMeal
 }

@@ -1,5 +1,6 @@
 interface Action {
-  type: string
+  type: string,
+  payload: Record<string, unknown>
 }
 
 export default Action

@@ -1,5 +1,12 @@
+interface Day {
+  breakfast: string,
+  lunch: string,
+  supper: string
+}
+
 interface State {
-  count: number
+  meals: Record<string, Day>,
+  ingredients: Array<string>
 }
 
 export default State
