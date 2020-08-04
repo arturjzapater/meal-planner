@@ -1,6 +1,10 @@
 import { createStore } from 'redux'
 import reducer from '../reducer'
 
-const init = {}
+const init = {
+  count: 0
+}
 
-const store = () => createStore(reducer, init)
+const store = createStore(reducer, init)
+
+export default store
