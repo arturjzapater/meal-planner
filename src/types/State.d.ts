@@ -1,11 +1,7 @@
-interface Day {
-  breakfast: string,
-  lunch: string,
-  supper: string
-}
+import Meals from './Meals'
 
 interface State {
-  meals: Record<string, Day>,
+  meals: Record<string, Meals>,
   ingredients: Array<string>
 }
 
