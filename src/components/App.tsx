@@ -26,7 +26,7 @@ const mapStateToProps = (state: State) => ({ ...state })
 
 const mapDispatchToProps = (dispatch: CallableFunction) => ({
   addIngredient: (ingredient: string) => dispatch(actions.addIngredient(ingredient)),
-  addMeal: (day: string, meal: string, dish: string) => dispatch(actions.addMeal(day, meal, dish))
+  addMeal: (day: string) => (meal: string) => (dish: string) => dispatch(actions.addMeal(day, meal, dish))
 })
 
 export default connect(

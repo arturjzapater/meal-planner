@@ -24,8 +24,22 @@ const actions: Record<string, CallableFunction> = {
   default: def
 }
 
+const dailyMeals = {
+  breakfast: '',
+  lunch: '',
+  supper: ''
+}
+
 const initState: State = {
-  meals: {},
+  meals: {
+    monday: { ...dailyMeals },
+    tuesday: { ...dailyMeals },
+    wednesday: { ...dailyMeals },
+    thursday: { ...dailyMeals },
+    friday: { ...dailyMeals },
+    saturday: { ...dailyMeals },
+    sunday: { ...dailyMeals }
+  },
   ingredients: []
 }
 
