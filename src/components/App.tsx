@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { connect } from 'react-redux'
+import AddMealForm from './AddMealForm'
 import Header from './Header'
 import MealSchedule from './MealSchedule'
 import ShoppingList from './ShoppingList'
@@ -14,6 +15,7 @@ interface AppProps extends State {
 const App = ({ meals, ingredients, addIngredient, addMeal }: AppProps): ReactElement => (
   <div>
     <Header />
+    <AddMealForm meals={meals} addMeal={addMeal} />
     <MealSchedule meals={meals} addMeal={addMeal} addIngredient={addIngredient} />
     <div>
       <ShoppingList ingredients={ingredients} />
