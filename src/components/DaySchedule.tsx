@@ -9,7 +9,7 @@ interface DayScheduleProps {
 }
 
 const DaySchedule = ({ day, meals }: DayScheduleProps): ReactElement => (
-  <article>
+  <article className='bg-purple-400 px-4 py-2'>
     <h2>{capitalise(day)}</h2>
     <DaySection title='Breakfast' content={meals.breakfast} />
     <DaySection title='Lunch' content={meals.lunch} />

@@ -22,15 +22,17 @@ const App = ({
   addNewMeal,
   changeNew
 }: AppProps): ReactElement => (
-  <div>
+  <>
     <Header />
-    <AddMealForm newMeal={newMeal} meals={meals} addNewMeal={addNewMeal} onChange={changeNew} />
-    <MealSchedule meals={meals} addIngredient={addIngredient} />
-    <div>
-      <ShoppingList ingredients={ingredients} />
-      <button onClick={() => addIngredient('Potatoes')}>Add Potatoes</button>
-    </div>
-  </div>
+    <main className='mx-4 md:mx-10 lg:mx-16 bg-purple-200 p-2 md:p-6'>
+      <AddMealForm newMeal={newMeal} meals={meals} addNewMeal={addNewMeal} onChange={changeNew} />
+      <MealSchedule meals={meals} addIngredient={addIngredient} />
+      <div>
+        <ShoppingList ingredients={ingredients} />
+        <button onClick={() => addIngredient('Potatoes')}>Add Potatoes</button>
+      </div>
+    </main>
+  </>
 )
 
 const mapStateToProps = (state: State) => ({ ...state })

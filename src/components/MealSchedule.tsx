@@ -16,7 +16,7 @@ const MealSchedule = ({ meals, addIngredient }: MealScheduleProps): ReactElement
     .map(mapDay)
 
   return (
-    <section id='week-schedule'>
+    <section id='week-schedule' className='grid grid-cols-7 gap-4'>
       {days}
     </section>
   )
