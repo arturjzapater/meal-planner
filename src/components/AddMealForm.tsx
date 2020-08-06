@@ -5,30 +5,15 @@ import Meals from '../types/Meals'
 
 interface AddMealFormProps {
   meals: Record<string, Meals>,
-  addMeal: CallableFunction
+  new: Record<string. string>,
+  addMeal: CallableFunction,
+  onChange: CallableFunction
 }
 
-const AddMealForm = ({ meals, addMeal }: AddMealFormProps): ReactElement => {
-  const [day, setDay] = useState('monday')
-  const [meal, setMeal] = useState('breakfast')
-  const [input, setInput] = useState('')
-
-  const handleChangeDay = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setDay(event.target.value)
-  }
-
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInput(event.target.value)
-  }
-
-  const handleChangeMeal = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setMeal(event.target.value)
-  }
-
+const AddMealForm = ({ meals, new, addMeal, onChange }: AddMealFormProps): ReactElement => {
   const handleSubmitInput = (event: React.MouseEvent) => {
     event.preventDefault()
     addMeal(day)(meal)(input)
-    setInput('')
   }
 
   return (

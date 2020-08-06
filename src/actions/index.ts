@@ -16,7 +16,13 @@ const addMeal = (day: string, meal: string, dish: string): Action => ({
   }
 })
 
+const changeNew = (prop: string, payload: string): Action => ({
+  type: `CHANGE_NEW_${prop.toUpperCase()}`,
+  payload
+})
+
 export default {
   addIngredient,
-  addMeal
+  addMeal,
+  changeNew
 }

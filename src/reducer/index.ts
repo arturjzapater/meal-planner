@@ -16,11 +16,22 @@ const addMeal = (state: State, { day, meal, dish }: Record<string, string>): Sta
   }
 })
 
+const changeNew = (prop: string) => (state: State, payload: string): State => ({
+  ...state,
+  new: {
+    ...state.new,
+    [prop]: payload
+  }
+})
+
 const def = (state: State): State => state
 
 const actions: Record<string, CallableFunction> = {
   ADD_INGREDIENT: addIngredient,
   ADD_MEAL: addMeal,
+  CHANGE_NEW_DAY: changeNew('day'),
+  CHANGE_NEW_MEAL: changeNew('meal'),
+  CHANGE_NEW_DISH: changeNew('dish'),
   default: def
 }
 
@@ -39,6 +50,11 @@ const initState: State = {
     friday: { ...dailyMeals },
     saturday: { ...dailyMeals },
     sunday: { ...dailyMeals }
+  },
+  new: {
+    day: '',
+    meal: '',
+    dish: ''
   },
   ingredients: []
 }
