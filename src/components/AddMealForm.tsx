@@ -1,19 +1,24 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 import Input from './Input'
 import Selector from './Selector'
 import Meals from '../types/Meals'
 
 interface AddMealFormProps {
   meals: Record<string, Meals>,
-  new: Record<string. string>,
-  addMeal: CallableFunction,
+  newMeal: Record<string, string>,
+  addNewMeal: CallableFunction,
   onChange: CallableFunction
 }
 
-const AddMealForm = ({ meals, new, addMeal, onChange }: AddMealFormProps): ReactElement => {
-  const handleSubmitInput = (event: React.MouseEvent) => {
+const AddMealForm = ({ meals, newMeal, addNewMeal, onChange }: AddMealFormProps): ReactElement => {
+  const handleChange = (prop: string) =>
+    (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+      onChange(prop, event.target.value)
+    }
+
+  const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault()
-    addMeal(day)(meal)(input)
+    addNewMeal()
   }
 
   return (
@@ -22,23 +27,23 @@ const AddMealForm = ({ meals, new, addMeal, onChange }: AddMealFormProps): React
         id='days'
         title='Day'
         options={Object.keys(meals)}
-        value={day}
-        onChange={handleChangeDay}
+        value={newMeal.day}
+        onChange={handleChange('day')}
       />
       <Selector
         id='meals'
         title='Meal'
         options={['breakfast', 'lunch', 'supper']}
-        value={meal}
-        onChange={handleChangeMeal}
+        value={newMeal.meal}
+        onChange={handleChange('meal')}
       />
       <Input
         title='Dish'
         type='text'
-        value={input}
-        onChange={handleChangeInput}
+        value={newMeal.dish}
+        onChange={handleChange('dish')}
       />
-      <button onClick={handleSubmitInput}>Add meal</button>
+      <button onClick={handleSubmit}>Add meal</button>
     </form>
   )
 }

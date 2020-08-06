@@ -3,7 +3,7 @@ import Meals from './Meals'
 interface State {
   meals: Record<string, Meals>,
   ingredients: Array<string>,
-  new: {
+  newMeal: {
     day: string,
     meal: string,
     dish: string
