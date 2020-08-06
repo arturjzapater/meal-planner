@@ -19,14 +19,13 @@ const App = ({
   newMeal,
   ingredients,
   addIngredient,
-  addMeal,
   addNewMeal,
   changeNew
 }: AppProps): ReactElement => (
   <div>
     <Header />
     <AddMealForm newMeal={newMeal} meals={meals} addNewMeal={addNewMeal} onChange={changeNew} />
-    <MealSchedule meals={meals} addMeal={addMeal} addIngredient={addIngredient} />
+    <MealSchedule meals={meals} addIngredient={addIngredient} />
     <div>
       <ShoppingList ingredients={ingredients} />
       <button onClick={() => addIngredient('Potatoes')}>Add Potatoes</button>
@@ -38,7 +37,6 @@ const mapStateToProps = (state: State) => ({ ...state })
 
 const mapDispatchToProps = (dispatch: CallableFunction) => ({
   addIngredient: (ingredient: string) => dispatch(actions.addIngredient(ingredient)),
-  addMeal: (day: string) => (meal: string) => (dish: string) => dispatch(actions.addMeal(day, meal, dish)),
   changeNew: (prop: string, value: string) => dispatch(actions.changeNew(prop, value)),
   addNewMeal: () => dispatch(actions.newMeal())
 })

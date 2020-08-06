@@ -5,16 +5,15 @@ import { capitalise } from '../lib/utils'
 
 interface DayScheduleProps {
     day: string,
-    meals: Meals,
-    addMeal: CallableFunction
+    meals: Meals
 }
 
-const DaySchedule = ({ day, meals, addMeal }: DayScheduleProps): ReactElement => (
+const DaySchedule = ({ day, meals }: DayScheduleProps): ReactElement => (
   <article>
     <h2>{capitalise(day)}</h2>
-    <DaySection title='Breakfast' content={meals.breakfast} addMeal={addMeal('breakfast')} />
-    <DaySection title='Lunch' content={meals.lunch} addMeal={addMeal('lunch')} />
-    <DaySection title='Supper' content={meals.supper} addMeal={addMeal('supper')} />
+    <DaySection title='Breakfast' content={meals.breakfast} />
+    <DaySection title='Lunch' content={meals.lunch} />
+    <DaySection title='Supper' content={meals.supper} />
   </article>
 )
 

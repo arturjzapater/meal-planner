@@ -4,18 +4,16 @@ import Meals from '../types/Meals'
 
 interface MealScheduleProps {
   meals: Record<string, Meals>,
-  addMeal: CallableFunction,
   addIngredient: CallableFunction
 }
 
-const mapDay = (addMeal: CallableFunction) =>
-  ([key, val]: [string, Meals]): ReactElement =>
-    <DaySchedule day={key} meals={val} key={key} addMeal={addMeal(key)} />
+const mapDay = ([key, val]: [string, Meals]): ReactElement =>
+  <DaySchedule day={key} meals={val} key={key} />
 
-const MealSchedule = ({ meals, addMeal, addIngredient }: MealScheduleProps): ReactElement => {
+const MealSchedule = ({ meals, addIngredient }: MealScheduleProps): ReactElement => {
   const days = Object
     .entries(meals)
-    .map(mapDay(addMeal))
+    .map(mapDay)
 
   return (
     <section id='week-schedule'>
