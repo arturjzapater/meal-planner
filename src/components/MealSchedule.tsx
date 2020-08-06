@@ -4,16 +4,18 @@ import Meals from '../types/Meals'
 
 interface MealScheduleProps {
   meals: Record<string, Meals>,
-  addIngredient: CallableFunction
+  addIngredient: CallableFunction,
+  remove: CallableFunction
 }
 
-const mapDay = ([key, val]: [string, Meals]): ReactElement =>
-  <DaySchedule day={key} meals={val} key={key} />
+const mapDay = (remove: CallableFunction) =>
+  ([key, val]: [string, Meals]): ReactElement =>
+    <DaySchedule day={key} meals={val} key={key} remove={remove(key)} />
 
-const MealSchedule = ({ meals, addIngredient }: MealScheduleProps): ReactElement => {
+const MealSchedule = ({ meals, addIngredient, remove }: MealScheduleProps): ReactElement => {
   const days = Object
     .entries(meals)
-    .map(mapDay)
+    .map(mapDay(remove))
 
   return (
     <section id='week-schedule' className='grid grid-cols-7 gap-4'>

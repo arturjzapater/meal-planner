@@ -28,9 +28,18 @@ const newMeal = (): Action => ({
   type: 'NEW_MEAL'
 })
 
+const removeMeal = (day: string, meal: string): Action => ({
+  type: 'REMOVE_MEAL',
+  payload: {
+    day,
+    meal
+  }
+})
+
 export default {
   addIngredient,
   addMeal,
   changeNew,
-  newMeal
+  newMeal,
+  removeMeal
 }

@@ -11,7 +11,8 @@ interface AppProps extends State {
   addIngredient: CallableFunction,
   addMeal: CallableFunction,
   addNewMeal: CallableFunction,
-  changeNew: CallableFunction
+  changeNew: CallableFunction,
+  removeMeal: CallableFunction
 }
 
 const App = ({
@@ -20,13 +21,23 @@ const App = ({
   ingredients,
   addIngredient,
   addNewMeal,
-  changeNew
+  changeNew,
+  removeMeal
 }: AppProps): ReactElement => (
   <>
     <Header />
     <main className='mx-4 md:mx-10 lg:mx-16 bg-purple-200 p-2 md:p-6'>
-      <AddMealForm newMeal={newMeal} meals={meals} addNewMeal={addNewMeal} onChange={changeNew} />
-      <MealSchedule meals={meals} addIngredient={addIngredient} />
+      <AddMealForm
+        newMeal={newMeal}
+        meals={meals}
+        addNewMeal={addNewMeal}
+        onChange={changeNew}
+      />
+      <MealSchedule
+        meals={meals}
+        remove={removeMeal}
+        addIngredient={addIngredient}
+      />
       <div>
         <ShoppingList ingredients={ingredients} />
         <button onClick={() => addIngredient('Potatoes')}>Add Potatoes</button>
@@ -40,7 +51,8 @@ const mapStateToProps = (state: State) => ({ ...state })
 const mapDispatchToProps = (dispatch: CallableFunction) => ({
   addIngredient: (ingredient: string) => dispatch(actions.addIngredient(ingredient)),
   changeNew: (prop: string, value: string) => dispatch(actions.changeNew(prop, value)),
-  addNewMeal: () => dispatch(actions.newMeal())
+  addNewMeal: () => dispatch(actions.newMeal()),
+  removeMeal: (day: string) => (meal: string) => dispatch(actions.removeMeal(day, meal))
 })
 
 export default connect(

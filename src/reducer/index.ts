@@ -39,6 +39,17 @@ const newMeal = (state: State): State => ({
   }
 })
 
+const removeMeal = (state: State, { day, meal }: Record<string, string>): State => ({
+  ...state,
+  meals: {
+    ...state.meals,
+    [day]: {
+      ...state.meals[day],
+      [meal]: ''
+    }
+  }
+})
+
 const def = (state: State): State => state
 
 const actions: Record<string, CallableFunction> = {
@@ -46,6 +57,7 @@ const actions: Record<string, CallableFunction> = {
   ADD_MEAL: addMeal,
   CHANGE_NEW: changeNew,
   NEW_MEAL: newMeal,
+  REMOVE_MEAL: removeMeal,
   default: def
 }
 
