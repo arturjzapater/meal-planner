@@ -36,10 +36,15 @@ const removeMeal = (day: string, meal: string): Action => ({
   }
 })
 
+const reset = (): Action => ({
+  type: 'RESET'
+})
+
 export default {
   addIngredient,
   addMeal,
   changeNew,
   newMeal,
-  removeMeal
+  removeMeal,
+  reset
 }

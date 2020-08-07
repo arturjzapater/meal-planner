@@ -50,6 +50,8 @@ const removeMeal = (state: State, { day, meal }: Record<string, string>): State 
   }
 })
 
+const reset = (): State => initState
+
 const def = (state: State): State => state
 
 const actions: Record<string, CallableFunction> = {
@@ -58,6 +60,7 @@ const actions: Record<string, CallableFunction> = {
   CHANGE_NEW: changeNew,
   NEW_MEAL: newMeal,
   REMOVE_MEAL: removeMeal,
+  RESET: reset,
   default: def
 }
 
