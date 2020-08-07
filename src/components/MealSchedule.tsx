@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import DaySchedule from './DaySchedule'
+import GridLeftHead from './GridLeftHead'
 import Meals from '../types/Meals'
 
 interface MealScheduleProps {
@@ -18,7 +19,8 @@ const MealSchedule: React.FC<MealScheduleProps> = ({ meals, addIngredient, remov
     .map(mapDay(remove))
 
   return (
-    <section id='week-schedule' className='grid grid-cols-7 gap-4'>
+    <section id='week-schedule' className='week-plan'>
+      <GridLeftHead fields={['', 'Breakfast', 'Lunch', 'Supper']} />
       {days}
     </section>
   )

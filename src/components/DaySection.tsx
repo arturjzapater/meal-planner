@@ -7,10 +7,10 @@ interface DaySectionProps {
 }
 
 const DaySection: React.FC<DaySectionProps> = ({ title, content, remove }) => (
-  <section>
-    <h2>{title}</h2>
+  <section className='bg-purple-300 p-2 flex space-between items-start h-24 overflow-y-auto'>
+    <h2 className='lg:hidden'>{title}</h2>
     <p>{content}</p>
-    {content && <button onClick={remove}>Remove</button>}
+    {content && <button className='ml-2' onClick={remove}>X</button>}
   </section>
 )
 

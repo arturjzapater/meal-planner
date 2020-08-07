@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.week-plan {
+    @apply flex flex-col;
+}
+
+@screen lg {
+    .week-plan {
+        @apply grid grid-cols-8 grid-rows-4 grid-flow-col gap-1;
+    }
+}

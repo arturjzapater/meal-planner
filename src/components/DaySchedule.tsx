@@ -1,7 +1,6 @@
 import React from 'react'
 import DaySection from './DaySection'
 import Meals from '../types/Meals'
-import { capitalise } from '../lib/utils'
 
 interface DayScheduleProps {
     day: string,
@@ -10,12 +9,12 @@ interface DayScheduleProps {
 }
 
 const DaySchedule: React.FC<DayScheduleProps> = ({ day, meals, remove }) => (
-  <article className='bg-purple-400 px-4 py-2'>
-    <h2>{capitalise(day)}</h2>
+  <>
+    <h2 className='bg-purple-400 text-center py-2 capitalize lg:self-end'>{day}</h2>
     <DaySection title='Breakfast' content={meals.breakfast} remove={() => remove('breakfast')} />
     <DaySection title='Lunch' content={meals.lunch} remove={() => remove('lunch')} />
     <DaySection title='Supper' content={meals.supper} remove={() => remove('supper')} />
-  </article>
+  </>
 )
 
 export default DaySchedule
