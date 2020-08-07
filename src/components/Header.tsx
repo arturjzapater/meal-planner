@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import Button from './Button'
-import State from '../types/State'
 import actions from '../actions'
+import mapStateToProps from '../lib/mapStateToProps'
 
 interface HeaderProps {
   reset: (event: React.MouseEvent<HTMLButtonElement> | void) => void,
@@ -15,9 +16,7 @@ const Header: React.FC<HeaderProps> = ({ reset }) => (
   </header>
 )
 
-const mapStateToProps = (state: State) => ({ ...state })
-
-const mapDispatchToProps = (dispatch: CallableFunction) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   reset: () => dispatch(actions.reset())
 })
 

@@ -1,19 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Input from './Input'
 import Selector from './Selector'
 import Meals from '../types/Meals'
+import actions from '../actions'
+import mapStateToProps from '../lib/mapStateToProps'
+import { Dispatch } from 'redux'
 
 interface AddMealFormProps {
   meals: Record<string, Meals>,
   newMeal: Record<string, string>,
   addNewMeal: CallableFunction,
-  onChange: CallableFunction
+  changeNew: CallableFunction
 }
 
-const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, onChange }) => {
+const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, changeNew }) => {
   const handleChange = (prop: string) =>
     (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-      onChange(prop, event.target.value)
+      changeNew(prop, event.target.value)
     }
 
   const handleSubmit = (event: React.MouseEvent) => {
@@ -48,4 +52,12 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, o
   )
 }
 
-export default AddMealForm
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  addNewMeal: () => dispatch(actions.newMeal()),
+  changeNew: (prop: string, value: string) => dispatch(actions.changeNew(prop, value))
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddMealForm)
