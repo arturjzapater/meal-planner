@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import Input from './Input'
 import Selector from './Selector'
 import Meals from '../types/Meals'
@@ -10,7 +10,7 @@ interface AddMealFormProps {
   onChange: CallableFunction
 }
 
-const AddMealForm = ({ meals, newMeal, addNewMeal, onChange }: AddMealFormProps): ReactElement => {
+const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, onChange }) => {
   const handleChange = (prop: string) =>
     (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
       onChange(prop, event.target.value)

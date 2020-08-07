@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import DaySection from './DaySection'
 import Meals from '../types/Meals'
 import { capitalise } from '../lib/utils'
@@ -9,7 +9,7 @@ interface DayScheduleProps {
     remove: CallableFunction
 }
 
-const DaySchedule = ({ day, meals, remove }: DayScheduleProps): ReactElement => (
+const DaySchedule: React.FC<DayScheduleProps> = ({ day, meals, remove }) => (
   <article className='bg-purple-400 px-4 py-2'>
     <h2>{capitalise(day)}</h2>
     <DaySection title='Breakfast' content={meals.breakfast} remove={() => remove('breakfast')} />

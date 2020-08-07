@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 
 interface InputProps {
   title: string,
@@ -7,7 +7,7 @@ interface InputProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input = ({ title, type, value, onChange }: InputProps): ReactElement => (
+const Input: React.FC<InputProps> = ({ title, type, value, onChange }) => (
   <label>
     {title}
     <input type={type} value={value} onChange={onChange} />

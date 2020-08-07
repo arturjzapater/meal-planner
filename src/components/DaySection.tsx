@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 
 interface DaySectionProps {
   title: string,
@@ -6,7 +6,7 @@ interface DaySectionProps {
   remove: () => void
 }
 
-const DaySection = ({ title, content, remove }: DaySectionProps): ReactElement => (
+const DaySection: React.FC<DaySectionProps> = ({ title, content, remove }) => (
   <section>
     <h2>{title}</h2>
     <p>{content}</p>

@@ -12,7 +12,7 @@ interface SelectorProps {
 const makeOpts = (id: string) => (x: string, i: number): ReactElement =>
   <option key={`${id}:${x}-${i}`} value={x}>{capitalise(x)}</option>
 
-const Selector = ({ id, title, options, value, onChange }: SelectorProps): ReactElement => (
+const Selector: React.FC<SelectorProps> = ({ id, title, options, value, onChange }) => (
   <label>
     {title}
     <select value={value} onChange={onChange}>

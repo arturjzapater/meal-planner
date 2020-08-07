@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import AddMealForm from './AddMealForm'
 import Header from './Header'
@@ -15,7 +15,7 @@ interface AppProps extends State {
   removeMeal: CallableFunction
 }
 
-const App = ({
+const App: React.FC<AppProps> = ({
   meals,
   newMeal,
   ingredients,
@@ -23,7 +23,7 @@ const App = ({
   addNewMeal,
   changeNew,
   removeMeal
-}: AppProps): ReactElement => (
+}) => (
   <>
     <Header />
     <main className='mx-4 md:mx-10 lg:mx-16 bg-purple-200 p-2 md:p-6'>

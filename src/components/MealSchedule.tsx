@@ -12,7 +12,7 @@ const mapDay = (remove: CallableFunction) =>
   ([key, val]: [string, Meals]): ReactElement =>
     <DaySchedule day={key} meals={val} key={key} remove={remove(key)} />
 
-const MealSchedule = ({ meals, addIngredient, remove }: MealScheduleProps): ReactElement => {
+const MealSchedule: React.FC<MealScheduleProps> = ({ meals, addIngredient, remove }) => {
   const days = Object
     .entries(meals)
     .map(mapDay(remove))
