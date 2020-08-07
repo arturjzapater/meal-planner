@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Button from './Button'
 import Input from './Input'
 import Selector from './Selector'
 import Meals from '../types/Meals'
@@ -20,13 +21,13 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, c
       changeNew(prop, event.target.value)
     }
 
-  const handleSubmit = (event: React.MouseEvent) => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
     addNewMeal()
   }
 
   return (
-    <form>
+    <form className='flex flex-col lg:w-2/5 mb-4'>
       <Selector
         id='days'
         title='Day'
@@ -47,7 +48,7 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, c
         value={newMeal.dish}
         onChange={handleChange('dish')}
       />
-      <button onClick={handleSubmit}>Add meal</button>
+      <Button onClick={handleSubmit} text='Add meal' style='mt-2' />
     </form>
   )
 }
