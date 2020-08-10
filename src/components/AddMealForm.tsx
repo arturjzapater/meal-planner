@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Dispatch } from 'redux'
 import Button from './Button'
 import Input from './Input'
 import Selector from './Selector'
 import Meals from '../types/Meals'
 import actions from '../actions'
 import mapStateToProps from '../lib/mapStateToProps'
-import { Dispatch } from 'redux'
 
 interface AddMealFormProps {
   meals: Record<string, Meals>,

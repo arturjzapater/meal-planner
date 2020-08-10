@@ -24,6 +24,13 @@ const changeNew = (prop: string, value: string): Action => ({
   }
 })
 
+const changeTitle = (title: string): Action => ({
+  type: 'CHANGE_TITLE',
+  payload: {
+    title
+  }
+})
+
 const newMeal = (): Action => ({
   type: 'NEW_MEAL'
 })
@@ -44,6 +51,7 @@ export default {
   addIngredient,
   addMeal,
   changeNew,
+  changeTitle,
   newMeal,
   removeMeal,
   reset

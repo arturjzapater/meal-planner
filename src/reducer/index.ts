@@ -24,6 +24,11 @@ const changeNew = (state: State, { prop, value }: Record<string, string>): State
   }
 })
 
+const changeTitle = (state: State, { title }: Record<string, string>): State => ({
+  ...state,
+  title
+})
+
 const newMeal = (state: State): State => ({
   ...state,
   meals: {
@@ -58,6 +63,7 @@ const actions: Record<string, CallableFunction> = {
   ADD_INGREDIENT: addIngredient,
   ADD_MEAL: addMeal,
   CHANGE_NEW: changeNew,
+  CHANGE_TITLE: changeTitle,
   NEW_MEAL: newMeal,
   REMOVE_MEAL: removeMeal,
   RESET: reset,
@@ -80,6 +86,7 @@ const initState: State = {
     saturday: { ...dailyMeals },
     sunday: { ...dailyMeals }
   },
+  title: 'Meal Schedule',
   newMeal: {
     day: 'monday',
     meal: 'breakfast',
