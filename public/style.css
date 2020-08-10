@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .week-plan {
-    @apply flex flex-col;
+    @apply flex flex-col my-2;
 }
 
 @screen lg {

@@ -1,11 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import AddMealForm from './AddMealForm'
+import Button from './Button'
 import Header from './Header'
 import MealSchedule from './MealSchedule'
 import ShoppingList from './ShoppingList'
 import actions from '../actions'
 import mapStateToProps from '../lib/mapStateToProps'
+import printPdf from '../lib/printPdf'
 import State from '../types/State'
 
 interface AppProps extends State {
@@ -21,6 +23,11 @@ const App: React.FC<AppProps> = ({
     <main className='mx-4 md:mx-10 lg:mx-16 bg-purple-200 p-2 md:p-6'>
       <AddMealForm />
       <MealSchedule />
+      <Button
+        onClick={() => printPdf(document.getElementById('week-schedule'))}
+        text='Save as PDF'
+        theme='dark'
+      />
       <div>
         <ShoppingList ingredients={ingredients} />
         <button onClick={() => addIngredient('Potatoes')}>Add Potatoes</button>
