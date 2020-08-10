@@ -4,9 +4,8 @@ import Button from './Button'
 import Header from './Header'
 import MealSchedule from './MealSchedule'
 import printPdf from '../lib/printPdf'
-import State from '../types/State'
 
-const App: React.FC<State> = () => (
+const App: React.FC = () => (
   <>
     <Header />
     <main className='mx-4 md:mx-10 lg:mx-16 bg-purple-200 p-2 md:p-6'>
