@@ -37,9 +37,11 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
     const { day, meal, dish } = formState
-    const ingredients = formState.ingredients
-      .split('\n')
-      .map(addKey(`${day}-${meal}`))
+    const ingredients = formState.ingredients.length > 0
+      ? formState.ingredients
+        .split('\n')
+        .map(addKey(`${day}-${meal}`))
+      : []
 
     addNewMeal(day, meal, dish, ingredients)
     setFormState({

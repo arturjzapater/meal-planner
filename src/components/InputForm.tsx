@@ -30,9 +30,9 @@ const InputForm: React.FC<InputFormProps> = ({
   }
 
   return (
-    <form className='flex my-2'>
+    <form className='flex flex-wrap my-2'>
       <Input title={label} type='text' value={value} onChange={handleChange} />
-      <Button onClick={handleSubmit} text={submit} style='ml-2' />
+      <Button onClick={handleSubmit} text={submit} style='lg:ml-2' />
     </form>
   )
 }

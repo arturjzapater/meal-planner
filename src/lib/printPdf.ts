@@ -29,7 +29,7 @@ const remove = (selector: string) => (node: Element): Element => {
 const _printPdf: (node: Element) => void = pipe(
   clone,
   remove('button'),
-  remove('form'),
+  // remove('form'),
   makePdf
 )
 

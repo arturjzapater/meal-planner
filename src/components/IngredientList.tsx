@@ -14,7 +14,7 @@ const makeIngredientList = pipe(
   map(prop('ingredient')),
   uniq,
   sort,
-  map(x => <IngredientItem ingredient={x} />)
+  map(x => <IngredientItem key={x} ingredient={x} />)
 )
 
 const IngredientList: React.FC<IngredientListProps> = ({ ingredients }) => (

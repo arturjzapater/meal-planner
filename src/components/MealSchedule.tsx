@@ -4,7 +4,7 @@ import { Dispatch } from 'redux'
 import DaySchedule from './DaySchedule'
 import GridLeftHead from './GridLeftHead'
 import Heading from './Heading'
-import InputForm from './InputForm'
+import ScheduleActions from './ScheduleActions'
 import Meals from '../types/Meals'
 import actions from '../actions'
 import mapStateToProps from '../lib/mapStateToProps'
@@ -32,7 +32,7 @@ const MealSchedule: React.FC<MealScheduleProps> = ({ meals, title, changeTitle, 
         <GridLeftHead fields={['', 'Breakfast', 'Lunch', 'Supper']} />
         {days}
       </div>
-      <InputForm label='New Title' submit='Change Title' onSubmit={changeTitle} />
+      <ScheduleActions changeTitle={changeTitle} />
     </section>
   )
 }
