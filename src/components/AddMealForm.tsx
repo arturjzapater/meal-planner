@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import Button from './Button'
@@ -11,20 +11,31 @@ import mapStateToProps from '../lib/mapStateToProps'
 
 interface AddMealFormProps {
   meals: Record<string, Meals>,
-  newMeal: Record<string, string>,
   addNewMeal: CallableFunction,
-  changeNew: CallableFunction
 }
 
-const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, changeNew }) => {
+const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
+  const [formState, setFormState] = useState({
+    day: 'monday',
+    meal: 'breakfast',
+    dish: ''
+  })
+
   const handleChange = (prop: string) =>
     (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-      changeNew(prop, event.target.value)
+      setFormState({
+        ...formState,
+        [prop]: event.target.value
+      })
     }
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    addNewMeal()
+    addNewMeal(...Object.values(formState))
+    setFormState({
+      ...formState,
+      dish: ''
+    })
   }
 
   return (
@@ -34,20 +45,20 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, c
           id='days'
           title='Day'
           options={Object.keys(meals)}
-          value={newMeal.day}
+          value={formState.day}
           onChange={handleChange('day')}
         />
         <Selector
           id='meals'
           title='Meal'
           options={['breakfast', 'lunch', 'supper']}
-          value={newMeal.meal}
+          value={formState.meal}
           onChange={handleChange('meal')}
         />
         <Input
           title='Dish'
           type='text'
-          value={newMeal.dish}
+          value={formState.dish}
           onChange={handleChange('dish')}
         />
       </section>
@@ -64,8 +75,7 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, c
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addNewMeal: () => dispatch(actions.newMeal()),
-  changeNew: (prop: string, value: string) => dispatch(actions.changeNew(prop, value))
+  addNewMeal: (day: string, meal: string, dish: string) => dispatch(actions.newMeal(day, meal, dish))
 })
 
 export default connect(
