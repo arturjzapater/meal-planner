@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import Button from './Button'
+import Heading from './Heading'
 import Input from './Input'
 import Selector from './Selector'
 import TextInput from './TextInput'
+import Ingredient from '../types/Ingredient'
 import Meals from '../types/Meals'
 import actions from '../actions'
 import mapStateToProps from '../lib/mapStateToProps'
@@ -14,15 +16,18 @@ interface AddMealFormProps {
   addNewMeal: CallableFunction,
 }
 
+const addKey = (key: string) => (ingredient: string) => ({ key, ingredient })
+
 const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
   const [formState, setFormState] = useState({
     day: 'monday',
     meal: 'breakfast',
-    dish: ''
+    dish: '',
+    ingredients: ''
   })
 
   const handleChange = (prop: string) =>
-    (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
       setFormState({
         ...formState,
         [prop]: event.target.value
@@ -31,15 +36,22 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    addNewMeal(...Object.values(formState))
+    const { day, meal, dish } = formState
+    const ingredients = formState.ingredients
+      .split('\n')
+      .map(addKey(`${day}-${meal}`))
+
+    addNewMeal(day, meal, dish, ingredients)
     setFormState({
       ...formState,
-      dish: ''
+      dish: '',
+      ingredients: ''
     })
   }
 
   return (
     <form className='flex flex-col lg:grid lg:grid-template-colums-2 lg:gap-3 mb-4'>
+      <Heading text='Add Meal' style='lg:col-span-2' />
       <section className='flex flex-col'>
         <Selector
           id='days'
@@ -65,8 +77,8 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
       <section className='flex flex-col'>
         <TextInput
           label='Ingredients'
-          value='12'
-          onChange={() => {}}
+          value={formState.ingredients}
+          onChange={handleChange('ingredients')}
         />
       </section>
       <Button onClick={handleSubmit} text='Add meal' style='mt-2 lg:col-span-2' />
@@ -75,7 +87,8 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  addNewMeal: (day: string, meal: string, dish: string) => dispatch(actions.newMeal(day, meal, dish))
+  addNewMeal: (day: string, meal: string, dish: string, ingredients: Array<Ingredient>) =>
+    dispatch(actions.newMeal(day, meal, dish, ingredients))
 })
 
 export default connect(

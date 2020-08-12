@@ -2,6 +2,7 @@ import React from 'react'
 import AddMealForm from './AddMealForm'
 import Button from './Button'
 import Header from './Header'
+import IngredientList from './IngredientList'
 import MealSchedule from './MealSchedule'
 import printPdf from '../lib/printPdf'
 
@@ -16,6 +17,7 @@ const App: React.FC = () => (
         text='Save as PDF'
         theme='dark'
       />
+      <IngredientList />
     </main>
   </>
 )

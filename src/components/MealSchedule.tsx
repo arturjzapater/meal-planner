@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import DaySchedule from './DaySchedule'
 import GridLeftHead from './GridLeftHead'
+import Heading from './Heading'
 import InputForm from './InputForm'
 import Meals from '../types/Meals'
 import actions from '../actions'
@@ -26,7 +27,7 @@ const MealSchedule: React.FC<MealScheduleProps> = ({ meals, title, changeTitle, 
 
   return (
     <section id='week-schedule'>
-      <h2 className='text-2xl font-serif font-semibold text-purple-600'>{title}</h2>
+      <Heading text={title} />
       <div className='week-plan'>
         <GridLeftHead fields={['', 'Breakfast', 'Lunch', 'Supper']} />
         {days}

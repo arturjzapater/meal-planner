@@ -1,20 +1,21 @@
 import Action from '../types/Action'
+import Ingredient from '../types/Ingredient'
 
-const addIngredient = (ingredient: string): Action => ({
-  type: 'ADD_INGREDIENT',
-  payload: {
-    ingredient
-  }
-})
+// const addIngredient = (ingredient: string): Action => ({
+//   type: 'ADD_INGREDIENT',
+//   payload: {
+//     ingredient
+//   }
+// })
 
-const addMeal = (day: string, meal: string, dish: string): Action => ({
-  type: 'ADD_MEAL',
-  payload: {
-    day,
-    meal,
-    dish
-  }
-})
+// const addMeal = (day: string, meal: string, dish: string): Action => ({
+//   type: 'ADD_MEAL',
+//   payload: {
+//     day,
+//     meal,
+//     dish
+//   }
+// })
 
 const changeTitle = (title: string): Action => ({
   type: 'CHANGE_TITLE',
@@ -23,12 +24,13 @@ const changeTitle = (title: string): Action => ({
   }
 })
 
-const newMeal = (day: string, meal: string, dish: string): Action => ({
+const newMeal = (day: string, meal: string, dish: string, ingredients: Array<Ingredient>): Action => ({
   type: 'NEW_MEAL',
   payload: {
     day,
     meal,
-    dish
+    dish,
+    ingredients
   }
 })
 
@@ -45,8 +47,8 @@ const reset = (): Action => ({
 })
 
 export default {
-  addIngredient,
-  addMeal,
+  // addIngredient,
+  // addMeal,
   changeTitle,
   newMeal,
   removeMeal,
