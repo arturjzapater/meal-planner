@@ -27,28 +27,33 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, c
   }
 
   return (
-    <form className='flex flex-col lg:w-2/5 mb-4'>
-      <Selector
-        id='days'
-        title='Day'
-        options={Object.keys(meals)}
-        value={newMeal.day}
-        onChange={handleChange('day')}
-      />
-      <Selector
-        id='meals'
-        title='Meal'
-        options={['breakfast', 'lunch', 'supper']}
-        value={newMeal.meal}
-        onChange={handleChange('meal')}
-      />
-      <Input
-        title='Dish'
-        type='text'
-        value={newMeal.dish}
-        onChange={handleChange('dish')}
-      />
-      <Button onClick={handleSubmit} text='Add meal' style='mt-2' />
+    <form className='flex flex-col lg:grid lg:grid-template-colums-2 lg:gap-3 mb-4'>
+      <section className='flex flex-col'>
+        <Selector
+          id='days'
+          title='Day'
+          options={Object.keys(meals)}
+          value={newMeal.day}
+          onChange={handleChange('day')}
+        />
+        <Selector
+          id='meals'
+          title='Meal'
+          options={['breakfast', 'lunch', 'supper']}
+          value={newMeal.meal}
+          onChange={handleChange('meal')}
+        />
+        <Input
+          title='Dish'
+          type='text'
+          value={newMeal.dish}
+          onChange={handleChange('dish')}
+        />
+      </section>
+      <section className='bg-pink-600'>
+
+      </section>
+      <Button onClick={handleSubmit} text='Add meal' style='mt-2 lg:col-span-2' />
     </form>
   )
 }

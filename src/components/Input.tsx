@@ -14,7 +14,7 @@ const Input: React.FC<InputProps> = ({ title, type, value, onChange }) => (
       type={type}
       value={value}
       onChange={onChange}
-      className='w-3/5 p-1 outline-none focus:border focus:border-purple-800'
+      className='w-3/5 p-1 outline-none border border-white focus:border-purple-800'
     />
   </label>
 )
