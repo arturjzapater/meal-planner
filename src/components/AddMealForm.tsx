@@ -51,7 +51,7 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
 
   return (
     <form className='flex flex-col lg:grid lg:grid-template-colums-2 lg:gap-3 mb-4'>
-      <Heading text='Add Meal' style='lg:col-span-2' />
+      <Heading text='Add a New Meal' style='lg:col-span-2' />
       <section className='flex flex-col'>
         <Selector
           id='days'

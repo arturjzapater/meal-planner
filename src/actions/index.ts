@@ -42,6 +42,13 @@ const removeMeal = (day: string, meal: string): Action => ({
   }
 })
 
+const removeIngredient = (ingredient: string): Action => ({
+  type: 'REMOVE_INGREDIENT',
+  payload: {
+    ingredient
+  }
+})
+
 const reset = (): Action => ({
   type: 'RESET'
 })
@@ -52,5 +59,6 @@ export default {
   changeTitle,
   newMeal,
   removeMeal,
+  removeIngredient,
   reset
 }

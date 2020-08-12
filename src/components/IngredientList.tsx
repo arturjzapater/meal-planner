@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Heading from './Heading'
+import IngredientItem from './IngredientItem'
 import Ingredient from '../types/Ingredient'
 import mapStateToProps from '../lib/mapStateToProps'
-import { map, pipe, prop, uniq } from '../lib/utils'
+import { map, pipe, prop, sort, uniq } from '../lib/utils'
 
 interface IngredientListProps {
   ingredients: Array<Ingredient>
@@ -12,7 +13,8 @@ interface IngredientListProps {
 const makeIngredientList = pipe(
   map(prop('ingredient')),
   uniq,
-  map(x => <article>{x}</article>)
+  sort,
+  map(x => <IngredientItem ingredient={x} />)
 )
 
 const IngredientList: React.FC<IngredientListProps> = ({ ingredients }) => (

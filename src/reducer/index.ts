@@ -1,5 +1,6 @@
 import { Action, State } from '../types'
 import Ingredient from '../types/Ingredient'
+import { not, pipe, prop } from '../lib/utils'
 
 // const addIngredient = (state: State, { ingredient }: { ingredient: string }): State => ({
 //   ...state,
@@ -24,6 +25,11 @@ interface NewMeal {
   ingredients: Array<Ingredient>
 }
 
+const isNot = (property: string, value: string) => pipe(
+  prop(property),
+  not(value)
+)
+
 const changeTitle = (state: State, { title }: Record<string, string>): State => ({
   ...state,
   title
@@ -38,7 +44,9 @@ const newMeal = (state: State, { day, meal, dish, ingredients }: NewMeal): State
       [meal]: dish
     }
   },
-  ingredients: state.ingredients.concat(ingredients)
+  ingredients: state.ingredients
+    .filter(isNot('key', `${day}-${meal}`))
+    .concat(ingredients)
 })
 
 const removeMeal = (state: State, { day, meal }: Record<string, string>): State => ({
@@ -49,7 +57,13 @@ const removeMeal = (state: State, { day, meal }: Record<string, string>): State 
       ...state.meals[day],
       [meal]: ''
     }
-  }
+  },
+  ingredients: state.ingredients.filter(isNot('key', `${day}-${meal}`))
+})
+
+const removeIngredient = (state: State, { ingredient }: Record<string, string>): State => ({
+  ...state,
+  ingredients: state.ingredients.filter(isNot('ingredient', ingredient))
 })
 
 const reset = (): State => initState
@@ -62,6 +76,7 @@ const actions: Record<string, CallableFunction> = {
   CHANGE_TITLE: changeTitle,
   NEW_MEAL: newMeal,
   REMOVE_MEAL: removeMeal,
+  REMOVE_INGREDIENT: removeIngredient,
   RESET: reset,
   default: def
 }
