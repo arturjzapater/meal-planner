@@ -14,6 +14,8 @@ const prop = (prop: string) => (obj: Record<string, any>) => obj[prop]
 
 const sort = (list: Array<any>): Array<any> => list.sort()
 
+const trim = (str: string): string => str.trim()
+
 const uniq = <T>(list: Array<T>): Array<T> => [...new Set(list)]
 
 export {
@@ -23,5 +25,6 @@ export {
   pipe,
   prop,
   sort,
+  trim,
   uniq
 }

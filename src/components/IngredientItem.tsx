@@ -11,9 +11,9 @@ interface IngredientItemProps {
 }
 
 const IngredientItem: React.FC<IngredientItemProps> = ({ ingredient, remove }) => (
-  <article className='flex justify-between'>
+  <article className='flex items-center justify-between'>
     <p>{ingredient}</p>
-    <Button onClick={() => remove(ingredient)} text='X' theme='danger' />
+    <Button onClick={() => remove(ingredient)} text='Remove' theme='danger' />
   </article>
 )
 
