@@ -25,7 +25,9 @@ const IngredientList: React.FC<IngredientListProps> = ({ ingredients, addIngredi
   <section>
     <Heading text='Shopping List' />
     <InputForm label='' submit='Add Ingredient' onSubmit={addIngredient} />
-    {makeIngredientList(ingredients)}
+    <div className='lg:grid lg:grid-cols-3 lg:gap-2 xl:grid-cols-4'>
+      {makeIngredientList(ingredients)}
+    </div>
   </section>
 )
 

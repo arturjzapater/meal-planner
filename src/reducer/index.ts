@@ -1,6 +1,6 @@
 import { Action, State } from '../types'
 import Ingredient from '../types/Ingredient'
-import { not, pipe, prop } from '../lib/utils'
+import { capitalise, not, pipe, prop } from '../lib/utils'
 
 // const addIngredient = (state: State, { ingredient }: { ingredient: string }): State => ({
 //   ...state,
@@ -32,7 +32,10 @@ const isNot = (property: string, value: string) => pipe(
 
 const addIngredient = (state: State, { ingredient }: Record<string, string>): State => ({
   ...state,
-  ingredients: state.ingredients.concat({ key: 'manually-added', ingredient })
+  ingredients: state.ingredients.concat({
+    key: 'manually-added',
+    ingredient: capitalise(ingredient)
+  })
 })
 
 const changeTitle = (state: State, { title }: Record<string, string>): State => ({

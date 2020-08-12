@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 import Button from './Button'
@@ -10,27 +10,55 @@ import Ingredient from '../types/Ingredient'
 import Meals from '../types/Meals'
 import actions from '../actions'
 import mapStateToProps from '../lib/mapStateToProps'
-import { pipe, trim } from '../lib/utils'
+import { capitalise, equal, pipe, prop, trim } from '../lib/utils'
 
 interface AddMealFormProps {
+  ingredients: Array<Ingredient>,
   meals: Record<string, Meals>,
   addNewMeal: CallableFunction,
 }
 
+interface FormState {
+  day: string,
+  meal: 'breakfast' | 'lunch' | 'supper'
+  dish: string,
+  ingredients: string
+}
+
+const initState: FormState = {
+  day: 'monday',
+  meal: 'breakfast',
+  dish: '',
+  ingredients: ''
+}
+
 const addKey = (key: string) => (ingredient: string) => ({ key, ingredient })
+
+const isRightKey = (key: string) => pipe(
+  prop('key'),
+  equal(key)
+)
 
 const makeObj = (key: string) => pipe(
   trim,
+  capitalise,
   addKey(key)
 )
 
-const AddMealForm: React.FC<AddMealFormProps> = ({ meals, addNewMeal }) => {
-  const [formState, setFormState] = useState({
-    day: 'monday',
-    meal: 'breakfast',
-    dish: '',
-    ingredients: ''
-  })
+const AddMealForm: React.FC<AddMealFormProps> = ({ ingredients, meals, addNewMeal }) => {
+  const [formState, setFormState] = useState(initState)
+
+  useEffect(() => {
+    const { day, meal } = formState
+    setFormState({
+      ...formState,
+      dish: meals[day][meal],
+      ingredients: ingredients
+        .filter(isRightKey(`${day}-${meal}`))
+        .map(prop('ingredient'))
+        .join('\n')
+    })
+  }, [formState.day, formState.meal])
 
   const handleChange = (prop: string) =>
     (event: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {

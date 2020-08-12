@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 const capitalise = (str: string): string => str[0].toUpperCase() + str.slice(1)
 
+const equal = (x: any) => (y: any): boolean => x === y
+
 const map = (fn: (value: any, index: number, array: Array<any>) => any) =>
   (list: Array<any>): Array<any> =>
     list.map(fn)
@@ -20,6 +22,7 @@ const uniq = <T>(list: Array<T>): Array<T> => [...new Set(list)]
 
 export {
   capitalise,
+  equal,
   map,
   not,
   pipe,
