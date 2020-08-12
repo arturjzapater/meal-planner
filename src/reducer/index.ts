@@ -30,6 +30,11 @@ const isNot = (property: string, value: string) => pipe(
   not(value)
 )
 
+const addIngredient = (state: State, { ingredient }: Record<string, string>): State => ({
+  ...state,
+  ingredients: state.ingredients.concat({ key: 'manually-added', ingredient })
+})
+
 const changeTitle = (state: State, { title }: Record<string, string>): State => ({
   ...state,
   title
@@ -71,7 +76,7 @@ const reset = (): State => initState
 const def = (state: State): State => state
 
 const actions: Record<string, CallableFunction> = {
-  // ADD_INGREDIENT: addIngredient,
+  ADD_INGREDIENT: addIngredient,
   // ADD_MEAL: addMeal,
   CHANGE_TITLE: changeTitle,
   NEW_MEAL: newMeal,

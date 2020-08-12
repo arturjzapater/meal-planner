@@ -1,12 +1,12 @@
 import Action from '../types/Action'
 import Ingredient from '../types/Ingredient'
 
-// const addIngredient = (ingredient: string): Action => ({
-//   type: 'ADD_INGREDIENT',
-//   payload: {
-//     ingredient
-//   }
-// })
+const addIngredient = (ingredient: string): Action => ({
+  type: 'ADD_INGREDIENT',
+  payload: {
+    ingredient
+  }
+})
 
 // const addMeal = (day: string, meal: string, dish: string): Action => ({
 //   type: 'ADD_MEAL',
@@ -54,7 +54,7 @@ const reset = (): Action => ({
 })
 
 export default {
-  // addIngredient,
+  addIngredient,
   // addMeal,
   changeTitle,
   newMeal,
