@@ -4,6 +4,7 @@ import { Dispatch } from 'redux'
 import Button from './Button'
 import Input from './Input'
 import Selector from './Selector'
+import TextInput from './TextInput'
 import Meals from '../types/Meals'
 import actions from '../actions'
 import mapStateToProps from '../lib/mapStateToProps'
@@ -50,8 +51,12 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ meals, newMeal, addNewMeal, c
           onChange={handleChange('dish')}
         />
       </section>
-      <section className='bg-pink-600'>
-
+      <section className='flex flex-col'>
+        <TextInput
+          label='Ingredients'
+          value='12'
+          onChange={() => {}}
+        />
       </section>
       <Button onClick={handleSubmit} text='Add meal' style='mt-2 lg:col-span-2' />
     </form>
