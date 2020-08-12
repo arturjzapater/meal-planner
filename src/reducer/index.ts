@@ -1,6 +1,6 @@
 import { Action, State } from '../types'
 import Ingredient from '../types/Ingredient'
-import { capitalise, not, pipe, prop } from '../lib/utils'
+import { capitalise, not, pipe, prop, trim } from '../lib/utils'
 
 // const addIngredient = (state: State, { ingredient }: { ingredient: string }): State => ({
 //   ...state,
@@ -18,17 +18,32 @@ import { capitalise, not, pipe, prop } from '../lib/utils'
 //   }
 // })
 
-interface NewMeal {
-  day: string,
-  meal: string,
-  dish: string,
-  ingredients: Array<Ingredient>
-}
+// interface NewMeal {
+//   day: string,
+//   meal: string,
+//   dish: string,
+//   ingredients: string
+// }
+
+const addKey = (key: string) => (ingredient: string) => ({ key, ingredient })
 
 const isNot = (property: string, value: string) => pipe(
   prop(property),
   not(value)
 )
+
+const makeObj = (key: string) => pipe(
+  trim,
+  capitalise,
+  addKey(key)
+)
+
+const parseIngredients = (day: string, meal: string, ingredients: string): Array<Ingredient> =>
+  ingredients.length === 0
+    ? []
+    : ingredients
+      .split(/\n|,/)
+      .map(makeObj(`${day}-${meal}`))
 
 const addIngredient = (state: State, { ingredient }: Record<string, string>): State => ({
   ...state,
@@ -43,7 +58,7 @@ const changeTitle = (state: State, { title }: Record<string, string>): State => 
   title
 })
 
-const newMeal = (state: State, { day, meal, dish, ingredients }: NewMeal): State => ({
+const newMeal = (state: State, { day, meal, dish, ingredients }: Record<string, string>): State => ({
   ...state,
   meals: {
     ...state.meals,
@@ -54,7 +69,7 @@ const newMeal = (state: State, { day, meal, dish, ingredients }: NewMeal): State
   },
   ingredients: state.ingredients
     .filter(isNot('key', `${day}-${meal}`))
-    .concat(ingredients)
+    .concat(parseIngredients(day, meal, ingredients))
 })
 
 const removeMeal = (state: State, { day, meal }: Record<string, string>): State => ({

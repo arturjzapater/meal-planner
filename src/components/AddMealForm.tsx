@@ -10,7 +10,8 @@ import Ingredient from '../types/Ingredient'
 import Meals from '../types/Meals'
 import actions from '../actions'
 import mapStateToProps from '../lib/mapStateToProps'
-import { capitalise, equal, pipe, prop, trim } from '../lib/utils'
+import { equal, pipe, prop } from '../lib/utils'
+import getNextMeal from '../lib/getNextMeal'
 
 interface AddMealFormProps {
   ingredients: Array<Ingredient>,
@@ -32,17 +33,9 @@ const initState: FormState = {
   ingredients: ''
 }
 
-const addKey = (key: string) => (ingredient: string) => ({ key, ingredient })
-
 const isRightKey = (key: string) => pipe(
   prop('key'),
   equal(key)
-)
-
-const makeObj = (key: string) => pipe(
-  trim,
-  capitalise,
-  addKey(key)
 )
 
 const AddMealForm: React.FC<AddMealFormProps> = ({ ingredients, meals, addNewMeal }) => {
@@ -68,18 +61,21 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ ingredients, meals, addNewMea
       })
     }
 
+  const handleReset = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+    setFormState(initState)
+  }
+
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
-    const { day, meal, dish } = formState
-    const ingredients = formState.ingredients.length > 0
-      ? formState.ingredients
-        .split(/\n|,/)
-        .map(makeObj(`${day}-${meal}`))
-      : []
 
+    const { day, meal, dish, ingredients } = formState
     addNewMeal(day, meal, dish, ingredients)
+
+    const { day: nextDay, meal: nextMeal } = getNextMeal(Object.keys(meals), ['breakfast', 'lunch', 'supper'])(day, meal)
     setFormState({
-      ...formState,
+      day: nextDay,
+      meal: nextMeal,
       dish: '',
       ingredients: ''
     })
@@ -117,7 +113,8 @@ const AddMealForm: React.FC<AddMealFormProps> = ({ ingredients, meals, addNewMea
           onChange={handleChange('ingredients')}
         />
       </section>
-      <Button onClick={handleSubmit} text='Add Meal' style='mt-2 lg:col-span-2' />
+      <Button onClick={handleSubmit} text='Add Meal' style='mt-2' />
+      <Button onClick={handleReset} text='Reset Form' theme='danger' style='mt-2 border' />
     </form>
   )
 }

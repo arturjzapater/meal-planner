@@ -29,7 +29,6 @@ const MealSchedule: React.FC<MealScheduleProps> = ({ meals, title, changeTitle, 
     <section id='week-schedule'>
       <Heading text={title} />
       <div className='week-plan'>
-        <GridLeftHead fields={['', 'Breakfast', 'Lunch', 'Supper']} />
         {days}
       </div>
       <ScheduleActions changeTitle={changeTitle} />

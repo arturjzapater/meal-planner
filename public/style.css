@@ -8,6 +8,6 @@
 
 @screen lg {
     .week-plan {
-        @apply grid grid-cols-8 grid-rows-schedule grid-flow-col gap-1;
+        @apply grid grid-cols-7 grid-rows-schedule grid-flow-col gap-1;
     }
 }
