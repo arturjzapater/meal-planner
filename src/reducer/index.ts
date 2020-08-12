@@ -2,29 +2,6 @@ import { Action, State } from '../types'
 import Ingredient from '../types/Ingredient'
 import { capitalise, not, pipe, prop, trim } from '../lib/utils'
 
-// const addIngredient = (state: State, { ingredient }: { ingredient: string }): State => ({
-//   ...state,
-//   ingredients: state.ingredients.concat(ingredient)
-// })
-
-// const addMeal = (state: State, { day, meal, dish }: Record<string, string>): State => ({
-//   ...state,
-//   meals: {
-//     ...state.meals,
-//     [day]: {
-//       ...state.meals[day],
-//       [meal]: dish
-//     }
-//   }
-// })
-
-// interface NewMeal {
-//   day: string,
-//   meal: string,
-//   dish: string,
-//   ingredients: string
-// }
-
 const addKey = (key: string) => (ingredient: string) => ({ key, ingredient })
 
 const isNot = (property: string, value: string) => pipe(
@@ -42,6 +19,7 @@ const parseIngredients = (day: string, meal: string, ingredients: string): Array
   ingredients.length === 0
     ? []
     : ingredients
+      .trim()
       .split(/\n|,/)
       .map(makeObj(`${day}-${meal}`))
 
@@ -95,7 +73,6 @@ const def = (state: State): State => state
 
 const actions: Record<string, CallableFunction> = {
   ADD_INGREDIENT: addIngredient,
-  // ADD_MEAL: addMeal,
   CHANGE_TITLE: changeTitle,
   NEW_MEAL: newMeal,
   REMOVE_MEAL: removeMeal,

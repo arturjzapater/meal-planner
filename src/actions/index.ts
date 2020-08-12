@@ -8,15 +8,6 @@ const addIngredient = (ingredient: string): Action => ({
   }
 })
 
-// const addMeal = (day: string, meal: string, dish: string): Action => ({
-//   type: 'ADD_MEAL',
-//   payload: {
-//     day,
-//     meal,
-//     dish
-//   }
-// })
-
 const changeTitle = (title: string): Action => ({
   type: 'CHANGE_TITLE',
   payload: {
@@ -55,7 +46,6 @@ const reset = (): Action => ({
 
 export default {
   addIngredient,
-  // addMeal,
   changeTitle,
   newMeal,
   removeMeal,
