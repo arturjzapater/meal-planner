@@ -11,29 +11,35 @@ const opts = {
   }
 }
 
-const clone = (node: Element): Node => node.cloneNode(true)
+const clone = (node: HTMLElement): Node => node.cloneNode(true)
 
-const makePdf = (elem: Element): void => {
+const makePdf = (elem: HTMLElement): void => {
   html2pdf()
     .set(opts)
     .from(elem)
     .save()
 }
 
-const remove = (selector: string) => (node: Element): Element => {
+const remove = (selector: string) => (node: HTMLElement): HTMLElement => {
   node.querySelectorAll(selector)
     .forEach(x => x.remove())
   return node
 }
 
-const _printPdf: (node: Element) => void = pipe(
+const setHeight = (height: string) => (elem: HTMLElement): HTMLElement => {
+  elem.style.height = height
+  return elem
+}
+
+const _printPdf: (node: HTMLElement) => void = pipe(
   clone,
+  setHeight('180mm'),
   remove('button'),
-  // remove('form'),
+  remove('form'),
   makePdf
 )
 
-const printPdf = (node: Element | null): void => {
+const printPdf = (node: HTMLElement | null): void => {
   if (node === null) return
   _printPdf(node)
 }
