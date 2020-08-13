@@ -19,3 +19,7 @@ npm start
 ```
 
 The app will be available on <localhost:3000> by default, but you can change that in [Webpack's configuration](webpack.config.js)
+
+## Known Limitations
+
+The PDF converter doesn't work on a mobile screen. It also doesn't print the schedule extremely well. I am investigating how to fix it.
