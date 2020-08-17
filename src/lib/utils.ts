@@ -9,8 +9,9 @@ const map = (fn: (value: any, index: number, array: Array<any>) => any) =>
 
 const not = (x: any) => (y: any): boolean => x !== y
 
-const pipe = (...fns: Array<CallableFunction>) => (value: any): any =>
-  fns.reduce((x, fn) => fn(x), value)
+const pipe = (...fns: Array<CallableFunction>) =>
+  (value: any): any =>
+    fns.reduce((x, fn) => fn(x), value)
 
 const prop = (prop: string) => (obj: Record<string, any>) => obj[prop]
 
