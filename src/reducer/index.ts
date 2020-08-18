@@ -101,7 +101,8 @@ const initState: State = {
   ingredients: []
 }
 
-const reducer = (state = initState, action: Action): State => {
+const reducer = (state: State = initState, action: Action | undefined = undefined): State => {
+  if (!action) return actions.default(state)
   const handler = actions[action.type] || actions.default
   return handler(state, action.payload)
 }
