@@ -108,3 +108,21 @@ const reducer = (state: State = initState, action: Action | undefined = undefine
 }
 
 export default reducer
+
+enum Lol {
+	A = 'a',
+	B = 'b'
+}
+
+const a: Record<Lol, string> = {
+	[Lol.A]: '21',
+	[Lol.B]: '22'
+}
+
+const b = Object.entries(a) as [Lol, string][]
+
+const x: (string | number)[] = [ 'a', 'b' ]
+const y = [ 1, 2 ]
+
+const z = x.concat(y)
+
